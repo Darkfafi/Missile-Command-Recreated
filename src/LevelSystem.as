@@ -7,6 +7,7 @@ package
 	import flash.geom.Point;
 	import towers.Tower;
 	import towers.TowerManager;
+	import weapons.EnemyMissile;
 	import weapons.Missile;
 	import weapons.MissileFactory;
 	import flash.utils.setTimeout;
@@ -70,7 +71,8 @@ package
 				var destination : Point = new Point(target.x, target.y);
 				var xPos : int =  _stage.stageWidth * Math.random();
 				
-				var enemyMissile : Missile =  missileFactory.addMissile(MissileFactory.ENEMY_MISSILE, _stage, xPos, 0, destination, (_level)* 10.5);
+				var enemyMissile : EnemyMissile =  missileFactory.addMissile(MissileFactory.ENEMY_MISSILE, _stage, xPos, 0, destination, (_level) * 10.5) as EnemyMissile;
+				enemyMissile.target = target;
 				_allEnemyMissiles.push(enemyMissile);
 			}
 		}

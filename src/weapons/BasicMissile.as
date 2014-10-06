@@ -21,6 +21,7 @@ package weapons
 		
 		override public function update(e : Event) :void {
 			super.update(e);
+			
 			if (this.y <= destination.y) {
 				explode();
 			}

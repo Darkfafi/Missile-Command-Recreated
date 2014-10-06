@@ -1,7 +1,9 @@
 package towers 
 {
 	import flash.display.Stage;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import weapons.EnemyMissile;
 	/**
 	 * ...
 	 * @author Ramses di Perna
@@ -16,6 +18,18 @@ package towers
 			
 			_stage = world;
 			_stage.addEventListener(MouseEvent.MOUSE_DOWN, shoot);
+			_stage.addEventListener(EnemyMissile.REMOVE_TARGET, removeTower); 
+		}
+		
+		private function removeTower(e:Event):void 
+		{
+			var enemyHitMissile : EnemyMissile = e.target as EnemyMissile;
+			if (_stage.contains(enemyHitMissile.target)) {
+				var index : int = _allTowers.indexOf(enemyHitMissile.target);
+				_stage.removeChild(enemyHitMissile.target);
+				_allTowers.splice(index, 1);
+			}
+			
 		}
 		
 		private function shoot(e:MouseEvent) :void 
