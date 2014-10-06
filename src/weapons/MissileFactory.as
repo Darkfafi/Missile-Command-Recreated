@@ -10,6 +10,7 @@ package weapons
 	public class MissileFactory 
 	{
 		public static const BASIC_MISSILE : String = "BasicMissile";
+		public static const ENEMY_MISSILE : String = "EnemyMissile";
 		
 		public function addMissile(missileType : String, container : Stage, xPos : int, yPos : int, destination : Point,speed : Number) :Missile {
 			
@@ -18,12 +19,17 @@ package weapons
 			
 			if(missileType == BASIC_MISSILE){
 				missile.drawMissile(0x11ff11);
+			}else if (missileType == ENEMY_MISSILE) {
+				
+				missile.drawMissile(0xff1111);
 			}
 			
 			missile.setPos(xPos, yPos, direction.angle * 180 / Math.PI);
-			
-			missile.armMissile(speed,missile.rotation,destination);
-			
+			if(BASIC_MISSILE){
+				missile.armMissile(speed,missile.rotation,destination);
+			}else if (ENEMY_MISSILE) {
+				missile.armMissile(-speed,missile.rotation,destination);
+			}
 			container.addChildAt(missile,1);
 			return missile;
 		}
@@ -34,6 +40,10 @@ package weapons
 				
 				case BASIC_MISSILE:
 				return new BasicMissile();
+				break;
+				
+				case ENEMY_MISSILE:
+				return new EnemyMissile();
 				break;
 				
 				default:

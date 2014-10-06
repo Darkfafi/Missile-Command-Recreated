@@ -50,6 +50,11 @@ package towers
 			}
 		}
 		
+		public function giveTowers() : Array {
+			
+			return _allTowers;
+		}
+		
 	}
 
 }

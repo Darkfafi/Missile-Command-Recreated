@@ -35,14 +35,14 @@ package weapons
 			y = _yPos;
 			rotation = _rot;
 		}
-		internal function update(e : Event) :void {
+		public function update(e : Event) :void {
 			this.x += movement.x * speed;
 			this.y += movement.y * speed;
 		}
 		
 		internal function explode() :void {
-			
 			dispatchEvent(new Event(EXPLODE, true));
+			stage.removeChild(this);
 		}
 	}
 

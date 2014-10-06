@@ -14,6 +14,7 @@ package
 	{
 		private var towerManager : TowerManager;
 		private var missileManager : MissileManager;
+		private var levelSystem : LevelSystem;
 		public function Game() 
 		{
 			this.addEventListener(Event.ADDED_TO_STAGE, init);
@@ -21,11 +22,15 @@ package
 		
 		private function init(e:Event):void 
 		{
-			removeEventListener(Event.ADDED_TO_STAGE, init);	
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
 			generateBackground(0x696969,0x6495ed);
+			
 			towerManager = new TowerManager(stage);
 			missileManager = new MissileManager(stage);
+			levelSystem = new LevelSystem(stage,towerManager);
 			towerManager.createTowers(3);
+			
 		}
 		
 		private function generateBackground(_groundColor : uint,_skyColor : uint) :void{

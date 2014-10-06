@@ -3,7 +3,7 @@ package weapons.explosions
 	import flash.display.Sprite;
 	import flash.events.Event;
 	/**
-	 * ...
+	 * ....0
 	 * @author Ramses di Perna
 	 */
 	public class Explosion extends Sprite
@@ -45,7 +45,7 @@ package weapons.explosions
 				this.maxSizeReached = true;
 			}
 			if (this.scaleX < 0) {
-				dispatchEvent(new Event(REMOVE,true));
+				stage.removeChild(this);
 			}
 		}
 		

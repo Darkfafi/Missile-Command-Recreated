@@ -5,9 +5,9 @@ package weapons
 	 * ...
 	 * @author Ramses di Perna
 	 */
-	public class BasicMissile extends Missile
+	public class EnemyMissile extends Missile
 	{
-		//bij enemy is het enemyBasicMissile
+		
 		override internal function drawMissile(color : uint):void 
 		{
 			graphics.beginFill(0x000000, 1);
@@ -21,10 +21,13 @@ package weapons
 		
 		override public function update(e : Event) :void {
 			super.update(e);
-			if (this.y <= destination.y) {
+			
+			if (this.y >= destination.y) {
 				explode();
+				
 			}
 		}
+		
 	}
 
 }
