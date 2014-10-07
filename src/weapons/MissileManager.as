@@ -5,14 +5,12 @@ package weapons
 	import flash.events.Event;
 	import towers.Tower;
 	import weapons.explosions.Explosion;
-	import weapons.explosions.ExplosionManager;
 	/**
 	 * ...
 	 * @author Ramses di Perna
 	 */
 	public class MissileManager extends Sprite
 	{
-		private var explosionManager : ExplosionManager;
 		private var _allMissiles : Array = [];
 		
 		private var _stage : Stage;
@@ -20,8 +18,6 @@ package weapons
 		public function MissileManager(world : Stage):void {
 			
 			_stage = world
-			
-			explosionManager = new ExplosionManager(_stage);
 			
 			_stage.addEventListener(Tower.FIRE, createMissile);
 			addEventListener(Event.ENTER_FRAME, update);
@@ -37,7 +33,6 @@ package weapons
 					_allMissiles.splice(i, 1);
 				}
 			}
-			explosionManager.update(e);
 		}
 		
 		public function createMissile(e:Event):void {

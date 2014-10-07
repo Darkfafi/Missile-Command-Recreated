@@ -10,7 +10,6 @@ package towers
 	 */
 	public class TowerManager
 	{
-		//deze klas regelt wie er schiet en de update.
 		private var _allTowers : Array = [];
 		private var _stage : Stage;
 		
@@ -18,10 +17,10 @@ package towers
 			
 			_stage = world;
 			_stage.addEventListener(MouseEvent.MOUSE_DOWN, shoot);
-			_stage.addEventListener(EnemyMissile.REMOVE_TARGET, removeTower); 
+			_stage.addEventListener(EnemyMissile.REMOVE_TARGET, removeTowerOnHit); 
 		}
 		
-		private function removeTower(e:Event):void 
+		private function removeTowerOnHit(e:Event):void 
 		{
 			var enemyHitMissile : EnemyMissile = e.target as EnemyMissile;
 			if (_stage.contains(enemyHitMissile.target)) {
@@ -46,6 +45,15 @@ package towers
 			if(chosenTower != null){
 				chosenTower.fire(_stage.mouseX, _stage.mouseY);
 			}
+		}
+		
+		public function rebuildTowers() : void {
+			var l : int = _allTowers.length;
+			for (var i : int = l - 1; i >= 0; i--) {
+				_stage.removeChild(_allTowers[i]);
+				_allTowers.splice(i, 1);
+			}
+			createTowers(3);
 		}
 		
 		public function createTowers(amount : int):void {

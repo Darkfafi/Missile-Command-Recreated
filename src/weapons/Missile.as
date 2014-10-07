@@ -40,9 +40,8 @@ package weapons
 			this.y += movement.y * speed;
 		}
 		
-		internal function explode() :void {
+		public function explode() :void {
 			dispatchEvent(new Event(EXPLODE, true));
-			stage.removeChild(this);
 		}
 	}
 

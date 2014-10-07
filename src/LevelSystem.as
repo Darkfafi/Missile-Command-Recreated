@@ -17,6 +17,8 @@ package
 	 */
 	public class LevelSystem extends Sprite
 	{
+		//public static const CREATE_NEW_TOWERS : String = "createNewTowers";
+		
 		private var _stage : Stage;
 		private var _towerManager : TowerManager;
 		private var _level : int = 1;
@@ -28,14 +30,15 @@ package
 		{
 			_stage = world;
 			_towerManager = towerManager;
-			_stage.addEventListener(Missile.EXPLODE, removeTarget);
+			_stage.addEventListener(Missile.EXPLODE, removeTarget); // <--- maakt dat de enemyrockets verwijdert worden. Fix het!
 			setTimeout(playLevel, 5000);
 		}
 		
 		private function removeTarget(e:Event):void {
-			var index : int = _allEnemyMissiles.indexOf(e.target as EnemyMissile);
-			_allEnemyMissiles.splice(index, 1);
-			
+			if(e.target == EnemyMissile){
+				var index : int = _allEnemyMissiles.indexOf(e.target as EnemyMissile);
+				_allEnemyMissiles.splice(index, 1);
+			}
 		}
 		
 		private function update(e : Event):void {
@@ -46,16 +49,18 @@ package
 				
 				if(_stage.contains(_allEnemyMissiles[i])){
 					_allEnemyMissiles[i].update(e);
+				}else {
+					_allEnemyMissiles.splice(i, 1);
 				}
 			}
 			
 			if (_allEnemyMissiles.length == 0 && _missilesMade >= _maxMissiles) {
 				endLevel();
 			}
+			//trace(_allEnemyMissiles.length);
 		}
 		
 		public function playLevel():void {
-			removeEventListener(Event.ENTER_FRAME, update);
 			addEventListener(Event.ENTER_FRAME, update);
 			_maxMissiles = 12 * (_level / 2);
 			trace(_maxMissiles);
@@ -63,9 +68,17 @@ package
 			
 		}
 		public function endLevel() :void {
-			//if(allrockets = < 0) {level ++ && playLevel} <--- aantekening
+			
+			removeEventListener(Event.ENTER_FRAME, update);
+			_missilesMade = 0;
 			_level ++;
-			playLevel();
+			setTimeout(playLevel, 3500);
+			_towerManager.rebuildTowers();
+		}
+		
+		public function get enemyRockets() : Array {
+			
+			return _allEnemyMissiles;
 		}
 		
 		private function createEnemyMissles(amount : int) :void {
@@ -80,14 +93,15 @@ package
 				var destination : Point = new Point(target.x, target.y); // error omdat als alle towers dood zijn hoor je game over te zij en niet nieuwe missiels te maken.
 				var xPos : int =  _stage.stageWidth * Math.random();
 				
-				var enemyMissile : EnemyMissile =  missileFactory.addMissile(MissileFactory.ENEMY_MISSILE, _stage, xPos, 0, destination, (_level) * 0.5) as EnemyMissile;
+				var enemyMissile : EnemyMissile =  missileFactory.addMissile(MissileFactory.ENEMY_MISSILE, _stage, xPos, 0, destination, 1 + ((_level/2) * 0.5)) as EnemyMissile;
 				enemyMissile.target = target;
 				_allEnemyMissiles.push(enemyMissile);
 				_missilesMade ++;
 			}
+			
 			if (_missilesMade < _maxMissiles) {
 				
-				setTimeout(createEnemyMissles, 2000,_maxMissiles / _level);
+				setTimeout(createEnemyMissles, 3000 + (200 * _level),_maxMissiles / _level);
 			}
 		}
 	}

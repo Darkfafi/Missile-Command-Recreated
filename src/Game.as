@@ -5,6 +5,7 @@ package
 	import towers.Tower;
 	import towers.TowerFactory;
 	import towers.TowerManager;
+	import weapons.explosions.ExplosionManager;
 	import weapons.MissileManager;
 	/**
 	 * ...
@@ -15,6 +16,7 @@ package
 		private var towerManager : TowerManager;
 		private var missileManager : MissileManager;
 		private var levelSystem : LevelSystem;
+		private var explosionManager : ExplosionManager;
 		public function Game() 
 		{
 			this.addEventListener(Event.ADDED_TO_STAGE, init);
@@ -28,7 +30,8 @@ package
 			
 			towerManager = new TowerManager(stage);
 			missileManager = new MissileManager(stage);
-			levelSystem = new LevelSystem(stage,towerManager);
+			levelSystem = new LevelSystem(stage, towerManager);
+			explosionManager = new ExplosionManager(stage,levelSystem);
 			towerManager.createTowers(3);
 			
 		}

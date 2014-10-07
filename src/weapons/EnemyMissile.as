@@ -26,9 +26,9 @@ package weapons
 			super.update(e);
 			
 			if (this.y >= destination.y) {
+				
 				removeTarget();
 				explode();
-				
 			}
 		}
 		
