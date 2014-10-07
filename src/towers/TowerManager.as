@@ -28,8 +28,7 @@ package towers
 				var index : int = _allTowers.indexOf(enemyHitMissile.target);
 				_stage.removeChild(enemyHitMissile.target);
 				_allTowers.splice(index, 1);
-			}
-			
+			}	
 		}
 		
 		private function shoot(e:MouseEvent) :void 

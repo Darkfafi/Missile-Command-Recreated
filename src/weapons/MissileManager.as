@@ -5,59 +5,39 @@ package weapons
 	import flash.events.Event;
 	import towers.Tower;
 	import weapons.explosions.Explosion;
+	import weapons.explosions.ExplosionManager;
 	/**
 	 * ...
 	 * @author Ramses di Perna
 	 */
 	public class MissileManager extends Sprite
 	{
+		private var explosionManager : ExplosionManager;
 		private var _allMissiles : Array = [];
-		private var _allExplosions : Array = [];
 		
 		private var _stage : Stage;
 		
 		public function MissileManager(world : Stage):void {
 			
-			_stage = world;
+			_stage = world
+			
+			explosionManager = new ExplosionManager(_stage);
+			
 			_stage.addEventListener(Tower.FIRE, createMissile);
-			_stage.addEventListener(Missile.EXPLODE, explodeRocket);
 			addEventListener(Event.ENTER_FRAME, update);
 		}
-		
-		private function explodeRocket(e:Event):void {
-			
-			var target : Missile = e.target as Missile;
-			var explosion : Explosion = new Explosion(0.2, 7);
-			
-			explosion.x = target.x;
-			explosion.y = target.y;
-			
-			_stage.addChild(explosion);
-			_allExplosions.push(explosion);
-		}
-		
 		public function update(e : Event):void {
 			
-			var lm : int = _allMissiles.length;
-			var le : int = _allExplosions.length;
+			var l : int = _allMissiles.length;
 			
-			for (var i : int = 0; i < lm; i++) {
-				if (_allMissiles[i] == null) {
-					_allMissiles.splice(i, 1);
-				}
+			for (var i : int = l - 1; i >= 0; i--) {
 				if (_stage.contains(_allMissiles[i])) {
 					_allMissiles[i].update(e);
+				}else {
+					_allMissiles.splice(i, 1);
 				}
 			}
-			
-			for (var j : int = 0; j < le; j++) {
-				if (_allExplosions[j] == null) {
-					_allExplosions.splice(i, 1);
-				}
-				if(_stage.contains(_allExplosions[j])){
-					_allExplosions[j].update(e);
-				}
-			}
+			explosionManager.update(e);
 		}
 		
 		public function createMissile(e:Event):void {

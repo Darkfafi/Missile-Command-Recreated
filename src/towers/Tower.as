@@ -52,7 +52,6 @@ package towers
 			_destination.x = xDes;
 			_destination.y = yDes;
 			dispatchEvent(new Event(FIRE, true));
-			//missileFactory fire function	
 		}
 	}
 }
