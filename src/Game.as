@@ -10,6 +10,8 @@ package
 	import weapons.explosions.ExplosionManager;
 	import weapons.MissileManager;
 	import flash.utils.setTimeout;
+	import world.WorldManager;
+	import world.WorldObjectsFactory;
 	/**
 	 * ...
 	 * @author Ramses di Perna
@@ -22,6 +24,7 @@ package
 		private var missileManager : MissileManager;
 		private var levelSystem : LevelSystem;
 		private var explosionManager : ExplosionManager;
+		private var worldManager : WorldManager;
 		
 		public function Game() 
 		{
@@ -39,13 +42,17 @@ package
 		}
 		private function startGame() : void {
 			SoundManager.playSound(SoundManager.GAME_BG_MUSIC);
+			
 			towerManager = new TowerManager(stage);
 			missileManager = new MissileManager(stage);
 			levelSystem = new LevelSystem(stage, towerManager);
-			explosionManager = new ExplosionManager(stage,levelSystem);
+			explosionManager = new ExplosionManager(stage, levelSystem);
+			worldManager = new WorldManager(stage);
+			
+			worldManager.createObjects(10);
 			towerManager.createTowers(3);
 			
-			uiSystem = new UISystem(towerManager,explosionManager,levelSystem)
+			uiSystem = new UISystem()
 			addChild(uiSystem);
 		}
 		private function generateBackground(_groundColor : uint,_skyColor : uint) :void{

@@ -11,6 +11,7 @@ package weapons.explosions
 	 */
 	public class ExplosionManager extends Sprite
 	{
+		public static const ENEMY_HIT : String = "enemyHit";
 		private var _stage : Stage;
 		private var _allExplosions : Array = [];
 		private var levelSystem : LevelSystem;
@@ -51,7 +52,8 @@ package weapons.explosions
 				var lx : int = enemyRockets.length;
 				for (var i : int = 0 ; i < lx; i++) {
 					if(_allExplosions[j] != null && enemyRockets[i] != null){
-						if (_allExplosions[j].hitTestObject(enemyRockets[i])) {			
+						if (_allExplosions[j].hitTestObject(enemyRockets[i])) {
+							
 							enemyRockets[i].explode();
 						}	
 					}

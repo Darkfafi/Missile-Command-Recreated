@@ -24,7 +24,7 @@ package ui
 		private var _scoreDisplay : TextField = new TextField();
 		private var _levelDisplay : TextField = new TextField();
 		
-		public function UISystem(towersMan : TowerManager,scoreMan  : ExplosionManager, levelMan : LevelSystem) 
+		public function UISystem() 
 		{
 			_scoreDisplay.setTextFormat(_uiStyle);
 			_levelDisplay.setTextFormat(_uiStyle);
@@ -50,12 +50,13 @@ package ui
 		
 		private function nextLevel(e:Event):void {
 			_level ++;
+			updateScore(_level * 150);
 			updateLevel();
 		}
 		
 		private function destroyedRocket(e:Event):void {
 			if (e.target is EnemyMissile) {
-				updateScore(10);
+				updateScore(100);
 			}
 		}
 		public function updateLevel() :void {
