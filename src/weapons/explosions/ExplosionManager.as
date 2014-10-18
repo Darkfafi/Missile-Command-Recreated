@@ -3,6 +3,7 @@ package weapons.explosions
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
+	import media.SoundManager;
 	import weapons.Missile;
 	/**
 	 * ...
@@ -31,6 +32,7 @@ package weapons.explosions
 			explosion.y = target.y;
 			
 			_stage.addChild(explosion);
+			SoundManager.playSound(SoundManager.EXPLOSION);
 			_allExplosions.push(explosion);
 			_stage.removeChild(target);
 		}

@@ -5,6 +5,7 @@ package
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.geom.Point;
+	import media.SoundManager;
 	import towers.Tower;
 	import towers.TowerManager;
 	import weapons.EnemyMissile;
@@ -62,6 +63,7 @@ package
 		
 		public function playLevel():void {
 			addEventListener(Event.ENTER_FRAME, update);
+			SoundManager.playSound(SoundManager.START_LEVEL);
 			_maxMissiles = 12 * (_level / 2);
 			trace(_maxMissiles);
 			createEnemyMissles(_maxMissiles / _level);

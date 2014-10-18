@@ -3,6 +3,7 @@ package towers
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import media.SoundManager;
 	import weapons.EnemyMissile;
 	/**
 	 * ...
@@ -42,7 +43,8 @@ package towers
 					chosenTower = _allTowers[i];
 				}
 			}
-			if(chosenTower != null){
+			if (chosenTower != null) {
+				SoundManager.playSound(SoundManager.SHOOT);
 				chosenTower.fire(_stage.mouseX, _stage.mouseY);
 			}
 		}
