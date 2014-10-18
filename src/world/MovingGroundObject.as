@@ -15,7 +15,7 @@ package world
 		
 		public function MovingGroundObject() 
 		{
-			addEventListener(Event.ENTER_FRAME, update);
+			
 		}
 		
 		internal function drawObject() : void {

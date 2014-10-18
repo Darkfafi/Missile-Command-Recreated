@@ -4,6 +4,8 @@ package world
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
+	import towers.TowerManager;
+	import weapons.EnemyMissile;
 	import weapons.explosions.Explosion;
 	/**
 	 * ...
@@ -19,12 +21,24 @@ package world
 		{
 			_stage = world;
 			addEventListener(Event.ENTER_FRAME, update);
+			_stage.addEventListener(TowerManager.REMOVE_CAR, removeCar);
+		}
+		
+		private function removeCar(e:Event):void 
+		{
+			_stage.removeChild(worldObjects[0]);
+			worldObjects.splice(0, 1);
+			if (worldObjects.length == 0) {
+				//Game Over
+			}
 		}
 		
 		
 		public function update(e : Event) :void {
-			
-			worldHitTest();
+			var l : int = worldObjects.length;
+			for (var i : int = 0; i < l; i++) {
+				worldObjects[i].update(e);
+			}
 		}
 		
 		public function createObjects(amount : uint) :void {
@@ -35,22 +49,6 @@ package world
 				
 				worldObjects.push(obj);
 			}
-			
-		}
-		
-		private function worldHitTest() :void {
-			for (var i : int = 0; i < _stage.numChildren; i++){
-				if(_stage.getChildAt(i) is Explosion){
-					var explosion : DisplayObject = _stage.getChildAt(i);
-					for (var j : int = 0; j < worldObjects.length; j++){
-						if (worldObjects[j].hitTestObject(explosion)) {
-							stage.removeChild(worldObjects[j]);
-							worldObjects.splice(j, 1);
-						}
-					}
-				}
-			}
 		}
 	}
-
 }

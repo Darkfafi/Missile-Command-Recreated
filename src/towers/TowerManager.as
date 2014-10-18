@@ -1,5 +1,6 @@
 package towers 
 {
+	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -11,6 +12,7 @@ package towers
 	 */
 	public class TowerManager
 	{
+		public static const REMOVE_CAR : String = "removeCar";
 		private var _allTowers : Array = [];
 		private var _stage : Stage;
 		
@@ -24,11 +26,15 @@ package towers
 		private function removeTowerOnHit(e:Event):void 
 		{
 			var enemyHitMissile : EnemyMissile = e.target as EnemyMissile;
-			if (_stage.contains(enemyHitMissile.target)) {
-				var index : int = _allTowers.indexOf(enemyHitMissile.target);
-				_stage.removeChild(enemyHitMissile.target);
-				_allTowers.splice(index, 1);
-			}	
+			if (enemyHitMissile.target != null && _allTowers.length > 0) {
+				if (_stage.contains(enemyHitMissile.target)) {
+					var index : int = _allTowers.indexOf(enemyHitMissile.target);
+					_stage.removeChild(enemyHitMissile.target);
+					_allTowers.splice(index, 1);
+				}
+			}else {
+				_stage.dispatchEvent(new Event(REMOVE_CAR,true));
+			}
 		}
 		
 		private function shoot(e:MouseEvent) :void 

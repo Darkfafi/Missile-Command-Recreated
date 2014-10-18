@@ -19,10 +19,11 @@ package media
 		public static const START_LEVEL : int = 4;
 		
 		public static var volume : int = 100;
-		public static var muteSounds : Boolean = false;
-		public static var muteMusic : Boolean = false;
+		public static var muteSounds : int = 1; // if 0 that sound is muted
+		public static var muteMusic : int = 1;
 		
-		private static var musicTransform : SoundTransform = new SoundTransform(1);
+		private static var volumeEffectsTrans : SoundTransform = new SoundTransform(0.002 * volume);
+		private static var volumeMusicTrans : SoundTransform = new SoundTransform(0.01 * volume);
 		
 		private static var soundChannel : SoundChannel = new SoundChannel();
 		private static var musicChannel : SoundChannel = new SoundChannel();
@@ -65,10 +66,10 @@ package media
 			sound = allSounds[soundInt];
 			
 			if (sound != allSounds[MENU_BG_MUSIC] && sound != allSounds[GAME_BG_MUSIC]) {
-				soundChannel = sound.play(0,0,musicTransform);
+				soundChannel = sound.play(0,0,volumeEffectsTrans);
 			}else {
 				musicChannel.stop();
-				musicChannel = sound.play(0,9999,musicTransform);
+				musicChannel = sound.play(0,9999,volumeMusicTrans);
 			}
 			
 		}

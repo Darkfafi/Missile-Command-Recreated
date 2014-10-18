@@ -96,8 +96,18 @@ package
 			for (var i : uint = 0; i < amount; i++) {
 				
 				var missileFactory : MissileFactory = new MissileFactory();
-				var target : Tower = allTowers[Math.floor(allTowers.length * Math.random())];
-				var destination : Point = new Point(target.x, target.y); // error omdat als alle towers dood zijn hoor je game over te zij en niet nieuwe missiels te maken.
+				var target : Tower; 
+				var destination : Point;
+				
+				if(allTowers.length != 0){
+					target = allTowers[Math.floor(allTowers.length * Math.random())];
+					destination = new Point(target.x, target.y);
+				}else { 
+					
+					target = null; 
+					destination = new Point(_stage.stageWidth * Math.random(), _stage.stageHeight - 20); 
+				}
+				
 				var xPos : int =  _stage.stageWidth * Math.random();
 				
 				var enemyMissile : EnemyMissile =  missileFactory.addMissile(MissileFactory.ENEMY_MISSILE, _stage, xPos, 0, destination, 1 + ((_level/2) * 0.5)) as EnemyMissile;
