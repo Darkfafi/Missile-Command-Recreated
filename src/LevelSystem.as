@@ -20,6 +20,8 @@ package
 	{
 		//public static const CREATE_NEW_TOWERS : String = "createNewTowers";
 		
+		public static const NEXT_LEVEL : String = "nextLevel"; 
+		
 		private var _stage : Stage;
 		private var _towerManager : TowerManager;
 		private var _level : int = 1;
@@ -74,6 +76,9 @@ package
 			removeEventListener(Event.ENTER_FRAME, update);
 			_missilesMade = 0;
 			_level ++;
+				
+			_stage.dispatchEvent(new Event(NEXT_LEVEL));
+			
 			setTimeout(playLevel, 3500);
 			_towerManager.rebuildTowers();
 		}
