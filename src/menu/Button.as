@@ -12,8 +12,9 @@ package menu
 	 */
 	public class Button extends Sprite
 	{
-		private var buttonWidth : int = 120;
-		private var buttonHeight : int = 60;
+		public static const BUTTON_FUNCTION : String = "buttonFunction"; 
+		private var _buttonWidth : int = 120;
+		private var _buttonHeight : int = 60;
 		private var menuFormat : TextFormat = new TextFormat();
 		private var buttonTextField : TextField = new TextField();
 		
@@ -54,7 +55,7 @@ package menu
 		}
 		protected function onClick(e:MouseEvent):void 
 		{
-			
+			dispatchEvent(new Event(BUTTON_FUNCTION, true));
 		}
 		
 		protected function idleDraw(buttonColor : uint, buttonTextColor : uint) :void {
@@ -78,9 +79,15 @@ package menu
 			buttonTextField.textColor = buttonTextColor;
 			
 		}
-		protected function onClickDraw():void {
-			
-			trace("function button");
+		
+		public function get buttonWidth():int 
+		{
+			return _buttonWidth;
+		}
+		
+		public function get buttonHeight():int 
+		{
+			return _buttonHeight;
 		}
 	}
 

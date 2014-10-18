@@ -3,6 +3,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import menu.Menu
+	import media.SoundManager;
 	
 	/**
 	 * ...
@@ -16,6 +17,7 @@ package
 		
 		private var menu : Menu = new Menu();
 		private var game : Game = new Game();
+		private var gameOver : GameOver = new GameOver();
 		
 		public function Main():void 
 		{
@@ -27,18 +29,36 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
-			switchScene(MENU);
-			//addChild(game);
+			SoundManager.loadSounds();
+			addEventListener(Event.ENTER_FRAME, checkSounds);
+			
+			addEventListener(Menu.START_GAME,startGame);
 		}
 		
-		private function switchScene(scene : String) : void {
+		private function checkSounds(e:Event):void 
+		{
+			if(SoundManager.allSoundsLoaded){
+				removeEventListener(Event.ENTER_FRAME,checkSounds);
+				switchScene(MENU);
+			}
+		}
+		
+		private function startGame(e:Event):void 
+		{
+			switchScene(GAME);
+		}
+		
+		public function switchScene(scene : String) : void {
 			
 			switch(scene) {
 				case MENU:
 					if (stage.contains(game)){
 						removeChild(game);
 						game = null;
-					}		//else if contains endscreen
+					} else if (stage.contains(gameOver)) {
+						removeChild(gameOver);
+						gameOver = null;
+					}
 					menu = new Menu()
 					addChild(menu)
 					break;
@@ -46,6 +66,9 @@ package
 					if (stage.contains(menu)) {
 						removeChild(menu)
 						menu = null
+					}else if (stage.contains(gameOver)) {
+						removeChild(gameOver);
+						gameOver = null;
 					}
 					game = new Game();
 					addChild(game);

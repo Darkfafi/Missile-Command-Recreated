@@ -16,7 +16,7 @@ package menu
 		override protected function init(e:Event):void 
 		{
 			super.init(e);
-			idleDraw(0xff7700, 0x000000);
+			onIdle(null);
 		}
 		override protected function onIdle(e:MouseEvent):void 
 		{
@@ -28,13 +28,5 @@ package menu
 			super.onHover(e);
 			onHoverDraw(0x111177, 0xFFFFFF);
 		}
-		
-		override protected function onClick(e:MouseEvent):void 
-		{
-			super.onClick(e);
-			onClickDraw();
-		}
-		
 	}
-
 }
