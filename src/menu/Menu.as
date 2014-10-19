@@ -31,12 +31,17 @@ package menu
 			displayHighscore.defaultTextFormat = new TextFormat('Impact',20,0xFF9999);
 			
 			if (innerHighscore.data) {
-				displayHighscore.text = "CURRENT HIGHSCORE : " + innerHighscore.data.score;
+				if(innerHighscore.data.score > 0){ 
+					displayHighscore.text = "CURRENT HIGHSCORE : " + innerHighscore.data.score;
+				}else {
+					displayHighscore.text = "CURRENT HIGHSCORE : NO HIGHSCORE YET!";
+				}
 			}
 			
 			displayName.defaultTextFormat = new TextFormat('Impact', 30, 0xFF0000);
 			
-			displayName.text = "MISSILE COMMAND RECREATED!"
+			displayName.text = "MISSILE COMMAND RECREATED!";
+			displayName.selectable = false;
 			
 			addEventListener(Button.BUTTON_FUNCTION, buttonPressed);
 		}
@@ -44,11 +49,11 @@ package menu
 		private function createBackground() :void {
 			
 			graphics.clear();
-			graphics.beginFill(0x024050);
+			graphics.beginFill(0x444444);
 			graphics.drawRect(0,0,stage.stageWidth, stage.stageHeight);
 			graphics.endFill();
 			
-			graphics.beginFill(0x222222);
+			graphics.beginFill(0x1240AB);
 			graphics.drawRect(0,0,stage.stageWidth, 100);
 			graphics.drawRect(0,500,stage.stageWidth, 100);
 			graphics.endFill();
@@ -76,7 +81,7 @@ package menu
 			startButton.x = (stage.stageWidth / 2) - startButton.buttonWidth/2;
 			startButton.y = (stage.stageHeight / 1.7) - startButton.buttonHeight;
 			
-			displayHighscore.x = startButton.x - displayHighscore.width / 2;
+			displayHighscore.x = startButton.x - displayHighscore.width;
 			displayHighscore.y = startButton.y - 100;
 			
 			displayHighscore.width = 800;
