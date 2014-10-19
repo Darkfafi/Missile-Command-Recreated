@@ -26,7 +26,7 @@ package towers
 		private function removeTowerOnHit(e:Event):void 
 		{
 			var enemyHitMissile : EnemyMissile = e.target as EnemyMissile;
-			if (enemyHitMissile.target != null && _allTowers.length > 0) {
+			if (enemyHitMissile.target != null && _allTowers[_allTowers.indexOf(enemyHitMissile.target)] != null) {
 				if (_stage.contains(enemyHitMissile.target)) {
 					var index : int = _allTowers.indexOf(enemyHitMissile.target);
 					_stage.removeChild(enemyHitMissile.target);

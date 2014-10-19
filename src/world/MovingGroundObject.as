@@ -31,7 +31,7 @@ package world
 			
 			this.x += (_speed * dir);
 			
-			if (this.x >= stage.stageWidth) {
+			if (this.x >= stage.stageWidth - this.width) {
 				dir = -1;
 				this.rotationX = dir;
 			}else if(this.x <= 0) {

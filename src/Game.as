@@ -26,6 +26,8 @@ package
 		private var explosionManager : ExplosionManager;
 		private var worldManager : WorldManager;
 		
+		private var lives : int = 10;
+		
 		public function Game() 
 		{
 			this.addEventListener(Event.ADDED_TO_STAGE, init);
@@ -49,10 +51,10 @@ package
 			explosionManager = new ExplosionManager(stage, levelSystem);
 			worldManager = new WorldManager(stage);
 			
-			worldManager.createObjects(10);
+			worldManager.createObjects(lives);
 			towerManager.createTowers(3);
 			
-			uiSystem = new UISystem()
+			uiSystem = new UISystem(lives)
 			addChild(uiSystem);
 		}
 		private function generateBackground(_groundColor : uint,_skyColor : uint) :void{
