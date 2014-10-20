@@ -29,6 +29,7 @@ package menu
 			innerHighscore = SharedObject.getLocal("Highscore");
 			
 			displayHighscore.defaultTextFormat = new TextFormat('Impact',20,0xFF9999);
+			displayHighscore.selectable = false;
 			
 			if (innerHighscore.data) {
 				if(innerHighscore.data.score > 0){ 
@@ -54,6 +55,7 @@ package menu
 			graphics.endFill();
 			
 			graphics.beginFill(0x1240AB);
+			graphics.lineStyle(2, 0x000000);
 			graphics.drawRect(0,0,stage.stageWidth, 100);
 			graphics.drawRect(0,500,stage.stageWidth, 100);
 			graphics.endFill();

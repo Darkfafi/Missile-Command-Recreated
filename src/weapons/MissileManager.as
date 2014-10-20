@@ -42,6 +42,10 @@ package weapons
 			_allMissiles.push(missile);
 		}
 		
+		public function destroy() : void {
+			_stage.removeEventListener(Tower.FIRE, createMissile);
+			removeEventListener(Event.ENTER_FRAME, update);
+		}
 	}
 
 }

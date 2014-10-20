@@ -24,7 +24,7 @@ package towers
 		}
 		
 		internal function initTower() :void {
-			//missileManager = new MissileManager(stage);
+			
 		}
 		
 		public function set ammo(value:int):void {

@@ -83,7 +83,10 @@ package towers
 			
 			return _allTowers;
 		}
-		
+		public function destroy() : void {
+			_stage.removeEventListener(MouseEvent.MOUSE_DOWN, shoot);
+			_stage.removeEventListener(EnemyMissile.REMOVE_TARGET, removeTowerOnHit); 
+		}
 	}
 
 }

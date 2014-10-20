@@ -121,6 +121,10 @@ package
 				setTimeout(createEnemyMissles, 3000 + (200 * _level),_maxMissiles / _level);
 			}
 		}
+		public function destroy() :void {
+			_stage.removeEventListener(Missile.EXPLODE, removeTarget);
+			removeEventListener(Event.ENTER_FRAME, update);
+		}
 	}
 
 }

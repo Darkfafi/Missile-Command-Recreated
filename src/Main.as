@@ -1,9 +1,11 @@
 package 
 {
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import menu.Menu
 	import media.SoundManager;
+	import world.WorldManager;
 	
 	/**
 	 * ...
@@ -32,7 +34,14 @@ package
 			SoundManager.loadSounds();
 			addEventListener(Event.ENTER_FRAME, checkSounds);
 			
-			addEventListener(Menu.START_GAME,startGame);
+			addEventListener(Menu.START_GAME, startGame);
+			stage.addEventListener(WorldManager.GAME_OVER, endGame);
+		}
+		
+		private function endGame(e:Event):void 
+		{
+			trace("yooo");
+			switchScene(MENU);
 		}
 		
 		private function checkSounds(e:Event):void 
@@ -52,30 +61,29 @@ package
 			
 			switch(scene) {
 				case MENU:
-					if (stage.contains(game)){
+					if (stage.contains(game)) {
+						game.destroy();
 						removeChild(game);
 						game = null;
-					} else if (stage.contains(gameOver)) {
-						removeChild(gameOver);
-						gameOver = null;
 					}
+					
 					menu = new Menu()
 					addChild(menu)
 					break;
 				case GAME:
 					if (stage.contains(menu)) {
-						removeChild(menu)
-						menu = null
+						removeChild(menu);
+						menu = null;
 					}else if (stage.contains(gameOver)) {
 						removeChild(gameOver);
 						gameOver = null;
 					}
+					trace(game);
 					game = new Game();
 					addChild(game);
 					break;
 			}
 		}
-		
 	}
 	
 }

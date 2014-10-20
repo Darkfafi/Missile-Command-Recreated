@@ -21,12 +21,12 @@ package menu
 		override protected function onIdle(e:MouseEvent):void 
 		{
 			super.onIdle(e);
-			idleDraw(0x1250AC, 0xFF6666);
+			idleDraw(0x1250AC, 0xFFFFFF);
 		}
 		override protected function onHover(e:MouseEvent):void 
 		{
 			super.onHover(e);
-			onHoverDraw(0x111177, 0xFFFFFF);
+			onHoverDraw(0x111177, 0xFF0000);
 		}
 	}
 }

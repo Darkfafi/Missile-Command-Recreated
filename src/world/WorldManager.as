@@ -13,6 +13,8 @@ package world
 	 */
 	public class WorldManager extends Sprite
 	{
+		public static const GAME_OVER : String = "gameOver";
+		
 		private var _stage : Stage;
 		private var worldObjects : Array = [];
 		
@@ -26,10 +28,13 @@ package world
 		
 		private function removeCar(e:Event):void 
 		{
-			_stage.removeChild(worldObjects[0]);
-			worldObjects.splice(0, 1);
-			if (worldObjects.length == 0) {
-				//Game Over
+			if(worldObjects.length > 0){
+				_stage.removeChild(worldObjects[0]);
+				worldObjects.splice(0, 1);
+			}
+			
+			if (worldObjects.length <= 0) {
+				_stage.dispatchEvent(new Event(GAME_OVER,true));
 			}
 		}
 		
@@ -49,6 +54,10 @@ package world
 				
 				worldObjects.push(obj);
 			}
+		}
+		public function destroy() :void {
+			removeEventListener(Event.ENTER_FRAME, update);
+			_stage.removeEventListener(TowerManager.REMOVE_CAR, removeCar);
 		}
 	}
 }

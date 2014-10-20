@@ -122,7 +122,12 @@ package ui
 			}
 			
 		}
-		
+		public function destroy() :void {
+			stage.removeEventListener(Missile.EXPLODE, destroyedRocket);
+			stage.removeEventListener(LevelSystem.NEXT_LEVEL, nextLevel);
+			stage.removeEventListener(TowerManager.REMOVE_CAR, destroyedCar);
+			innerHighscore.flush();
+		}
 	}
 
 }

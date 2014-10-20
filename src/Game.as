@@ -1,5 +1,6 @@
 package  
 {
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import media.SoundManager;
@@ -7,7 +8,9 @@ package
 	import towers.TowerFactory;
 	import towers.TowerManager;
 	import ui.UISystem;
+	import weapons.explosions.Explosion;
 	import weapons.explosions.ExplosionManager;
+	import weapons.Missile;
 	import weapons.MissileManager;
 	import flash.utils.setTimeout;
 	import world.WorldManager;
@@ -50,11 +53,11 @@ package
 			levelSystem = new LevelSystem(stage, towerManager);
 			explosionManager = new ExplosionManager(stage, levelSystem);
 			worldManager = new WorldManager(stage);
+			uiSystem = new UISystem(lives);
 			
 			worldManager.createObjects(lives);
 			towerManager.createTowers(3);
 			
-			uiSystem = new UISystem(lives)
 			addChild(uiSystem);
 		}
 		private function generateBackground(_groundColor : uint,_skyColor : uint) :void{
@@ -66,6 +69,30 @@ package
 			graphics.beginFill(_groundColor, 1);
 			graphics.drawRect(0, 550, 800, 50);
 			graphics.endFill();
+		}
+		public function destroy() : void {
+			var i:int, l:int, cur:DisplayObject;
+			
+			l = stage.numChildren;
+			
+			for ( i = l - 1; i >=  0; i-- ) {
+				
+				cur = stage.getChildAt(i);
+				
+				if(cur is Missile || cur is Explosion || cur is Tower){
+					stage.removeChild(cur);
+				}
+			}
+			cur = null;
+			i = l = NaN;
+			
+			towerManager.destroy();
+			missileManager.destroy();
+			levelSystem.destroy();
+			explosionManager.destroy();
+			worldManager.destroy();
+			uiSystem.destroy();
+			removeChild(uiSystem);	
 		}
 	}
 

@@ -60,6 +60,10 @@ package weapons.explosions
 				}
 			}
 		}
+		public function destroy() :void {
+			_stage.removeEventListener(Missile.EXPLODE, explodeRocket);
+			removeEventListener(Event.ENTER_FRAME, update);
+		}
 	}
 
 }

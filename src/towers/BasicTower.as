@@ -12,6 +12,8 @@ package towers
 		
 		override internal function drawTower() :void {
 			
+			super.drawTower();
+			
 			graphics.beginFill(0x000000, 1);
 			graphics.drawRect(0, -5, 30, 10);
 			graphics.endFill();
