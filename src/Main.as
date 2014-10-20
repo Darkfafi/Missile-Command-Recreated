@@ -6,6 +6,7 @@ package
 	import menu.Menu
 	import media.SoundManager;
 	import world.WorldManager;
+	import flash.display.LoaderInfo;
 	
 	/**
 	 * ...
@@ -17,6 +18,7 @@ package
 		public static const GAME : String = "game";
 		public static const ENDGAME : String = "endGame";
 		
+		private var loadingScreen : LoadingScreen = new LoadingScreen();
 		private var menu : Menu = new Menu();
 		private var game : Game = new Game();
 		private var gameOver : GameOver = new GameOver();
@@ -34,21 +36,27 @@ package
 			SoundManager.loadSounds();
 			addEventListener(Event.ENTER_FRAME, checkSounds);
 			
+			
 			addEventListener(Menu.START_GAME, startGame);
 			stage.addEventListener(WorldManager.GAME_OVER, endGame);
 		}
 		
 		private function endGame(e:Event):void 
 		{
-			trace("yooo");
 			switchScene(MENU);
 		}
 		
 		private function checkSounds(e:Event):void 
 		{
-			if(SoundManager.allSoundsLoaded){
+			
+			if (SoundManager.allSoundsLoaded) {
+				if (contains(loadingScreen)) {
+					removeChild(loadingScreen);
+				}
 				removeEventListener(Event.ENTER_FRAME,checkSounds);
 				switchScene(MENU);
+			}else if (!contains(loadingScreen)) {
+				addChild(loadingScreen);
 			}
 		}
 		

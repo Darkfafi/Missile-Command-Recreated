@@ -79,7 +79,7 @@ package
 				
 				cur = stage.getChildAt(i);
 				
-				if(cur is Missile || cur is Explosion || cur is Tower){
+				if(cur is Sprite){
 					stage.removeChild(cur);
 				}
 			}
@@ -92,7 +92,14 @@ package
 			explosionManager.destroy();
 			worldManager.destroy();
 			uiSystem.destroy();
-			removeChild(uiSystem);	
+			removeChild(uiSystem);
+			
+			towerManager = null;
+			missileManager = null;
+			levelSystem = null;
+			explosionManager = null;
+			worldManager = null;
+			uiSystem = null;
 		}
 	}
 

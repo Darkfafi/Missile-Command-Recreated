@@ -46,6 +46,7 @@ package media
 			
 			//sounds/effects
 			for (var i : int = 0; i < allUrls.length; i++) {
+				
 				var sound : Sound = new Sound();
 				sound.addEventListener(Event.COMPLETE, soundLoaded);
 				sound.load(allUrls[i]);
