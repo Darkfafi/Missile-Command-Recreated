@@ -6,6 +6,8 @@ package menu
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import media.SoundManager;
+	import flash.display.StageDisplayState;
+	import flash.display.StageScaleMode;
 	/**
 	 * ...
 	 * @author Ramses di Perna
@@ -15,6 +17,7 @@ package menu
 		public static const START_GAME : String = "startGame";
 		
 		private var startButton : StartButton = new StartButton();
+		private var fullScreenButton : FullScreenButton = new FullScreenButton();
 		
 		private var displayHighscore : TextField = new TextField();
 		private var displayName : TextField = new TextField();
@@ -66,6 +69,11 @@ package menu
 		{
 			if(e.target == startButton){
 				dispatchEvent(new Event(START_GAME, true));
+			}else if(e.target == fullScreenButton){
+				if(stage.displayState == StageDisplayState.NORMAL){
+					stage.displayState = StageDisplayState.FULL_SCREEN; 
+					stage.scaleMode = StageScaleMode.EXACT_FIT;
+				}else { stage.displayState = StageDisplayState.NORMAL; }
 			}
 		}
 		
@@ -83,6 +91,9 @@ package menu
 			startButton.x = (stage.stageWidth / 2) - startButton.buttonWidth/2;
 			startButton.y = (stage.stageHeight / 1.7) - startButton.buttonHeight;
 			
+			fullScreenButton.x = startButton.x;
+			fullScreenButton.y = startButton.y + 70;
+			
 			displayHighscore.x = startButton.x - displayHighscore.width;
 			displayHighscore.y = startButton.y - 100;
 			
@@ -90,6 +101,8 @@ package menu
 			displayName.width = 800;
 			
 			addChild(startButton);
+			addChild(fullScreenButton);
+			
 			addChild(displayHighscore);
 			addChild(displayName);
 		}

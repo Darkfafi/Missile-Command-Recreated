@@ -33,7 +33,7 @@ package
 		{
 			_stage = world;
 			_towerManager = towerManager;
-			_stage.addEventListener(Missile.EXPLODE, removeTarget); // <--- maakt dat de enemyrockets verwijdert worden. Fix het!
+			addEventListener(Missile.EXPLODE, removeTarget); // <--- maakt dat de enemyrockets verwijdert worden. Fix het!
 			setTimeout(playLevel, 5000);
 		}
 		
@@ -122,7 +122,7 @@ package
 			}
 		}
 		public function destroy() :void {
-			_stage.removeEventListener(Missile.EXPLODE, removeTarget);
+			removeEventListener(Missile.EXPLODE, removeTarget);
 			removeEventListener(Event.ENTER_FRAME, update);
 		}
 	}

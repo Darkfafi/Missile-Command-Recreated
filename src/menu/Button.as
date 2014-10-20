@@ -13,7 +13,7 @@ package menu
 	public class Button extends Sprite
 	{
 		public static const BUTTON_FUNCTION : String = "buttonFunction"; 
-		private var _buttonWidth : int = 120;
+		private var _buttonWidth : int = 150;
 		private var _buttonHeight : int = 60;
 		private var menuFormat : TextFormat = new TextFormat();
 		private var buttonTextField : TextField = new TextField();
@@ -28,6 +28,7 @@ package menu
 			
 			buttonTextField.defaultTextFormat = menuFormat;
 			buttonTextField.text = buttonText;
+			buttonTextField.width = buttonText.length * 11.1;
 			buttonTextField.selectable = false;
 		}
 		
@@ -35,7 +36,7 @@ package menu
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			buttonTextField.x = buttonWidth / 3.5;
+			buttonTextField.x = 5;
 			buttonTextField.y =	buttonHeight / 5;
 			addChild(buttonTextField);
 			
