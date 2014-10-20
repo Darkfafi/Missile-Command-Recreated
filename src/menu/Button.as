@@ -27,6 +27,7 @@ package menu
 			buttonTextField.height = buttonHeight / 2;
 			
 			buttonTextField.defaultTextFormat = menuFormat;
+			buttonTextField.embedFonts;
 			buttonTextField.text = buttonText;
 			buttonTextField.width = buttonText.length * 11.1;
 			buttonTextField.selectable = false;
