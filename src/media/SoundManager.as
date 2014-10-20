@@ -35,6 +35,7 @@ package media
 		
 		
 		public static function loadSounds() : void {
+			
 			// music
 			allUrls.push(new URLRequest("https://www.dropbox.com/s/vs1zoxkyw1fkivx/Menu.mp3?dl=1")); //Background Menu Music
 			allUrls.push(new URLRequest("https://www.dropbox.com/s/vclk1eprepo9kgg/InGame.mp3?dl=1")); //Background Game Music
