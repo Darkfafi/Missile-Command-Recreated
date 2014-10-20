@@ -58,7 +58,7 @@ package media
 		{
 			e.target.removeEventListener(Event.COMPLETE, soundLoaded);
 			allSoundsLoaded += 1;
-			if (allSoundsLoaded == allUrls.length) {
+			if (allSoundsLoaded == allUrls.length && allSoundsLoaded == allSounds.length) {
 				allSoundsLoaded = true;
 			}
 		}

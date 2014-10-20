@@ -99,8 +99,6 @@ package
 			levelSystem = null;
 			explosionManager = null;
 			worldManager = null;
-			uiSystem = null;
 		}
 	}
-
 }
