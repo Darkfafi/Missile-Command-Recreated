@@ -1,6 +1,7 @@
 package media
 {
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	import flash.media.SoundMixer;
@@ -28,8 +29,8 @@ package media
 		private static var soundChannel : SoundChannel = new SoundChannel();
 		private static var musicChannel : SoundChannel = new SoundChannel();
 		
+		private static var totalSoundsLoaded : int = 0;
 		public static var allSoundsLoaded : Boolean = false;
-		
 		private static var allUrls : Array = [];
 		private static var allSounds : Array = [];
 		
@@ -44,23 +45,23 @@ package media
 			allUrls.push(new URLRequest("https://www.dropbox.com/s/60try4kw19d4sbh/IncomingEnemyRockets.mp3?dl=1")); //startLevel sound
 			
 			//sounds/effects
-			
-			
 			for (var i : int = 0; i < allUrls.length; i++) {
 				var sound : Sound = new Sound();
-				
+				sound.addEventListener(Event.COMPLETE, soundLoaded);
 				sound.load(allUrls[i]);
-				
-				if (sound.bytesLoaded == sound.bytesTotal) {
-					
-					allSounds.push(sound);
-					
-					if (allSounds.length == allUrls.length) {
-						allSoundsLoaded = true;
-					}
-				}
+				allSounds.push(sound);
 			}
 		}
+		
+		static private function soundLoaded(e:Event):void 
+		{
+			e.target.removeEventListener(Event.COMPLETE, soundLoaded);
+			allSoundsLoaded += 1;
+			if (allSoundsLoaded == allUrls.length) {
+				allSoundsLoaded = true;
+			}
+		}
+		
 		public static function playSound(soundInt : int) :void {
 			var sound : Sound = new Sound();
 			
