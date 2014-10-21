@@ -29,7 +29,7 @@ package menu
 			buttonTextField.defaultTextFormat = menuFormat;
 			buttonTextField.embedFonts;
 			buttonTextField.text = buttonText;
-			buttonTextField.width = buttonText.length * 11.1;
+			buttonTextField.width = buttonText.length * 13;
 			buttonTextField.selectable = false;
 		}
 		

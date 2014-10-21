@@ -7,6 +7,7 @@ package
 	import media.SoundManager;
 	import world.WorldManager;
 	import flash.display.LoaderInfo;
+	import flash.display.StageScaleMode;
 	
 	/**
 	 * ...
@@ -36,7 +37,7 @@ package
 			SoundManager.loadSounds();
 			addEventListener(Event.ENTER_FRAME, checkSounds);
 			
-			
+			stage.scaleMode = StageScaleMode.EXACT_FIT;
 			addEventListener(Menu.START_GAME, startGame);
 			stage.addEventListener(WorldManager.GAME_OVER, endGame);
 		}

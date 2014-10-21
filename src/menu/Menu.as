@@ -72,7 +72,6 @@ package menu
 			}else if(e.target == fullScreenButton){
 				if(stage.displayState == StageDisplayState.NORMAL){
 					stage.displayState = StageDisplayState.FULL_SCREEN; 
-					stage.scaleMode = StageScaleMode.EXACT_FIT;
 				}else { stage.displayState = StageDisplayState.NORMAL; }
 			}
 		}
